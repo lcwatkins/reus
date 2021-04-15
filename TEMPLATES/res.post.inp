@@ -1,0 +1,14 @@
+include         ../pair_bond_lql.cfg
+
+timestep        1.0
+fix             1 all nvt temp 298.0 298.0 100.0 
+fix             evb all evb ../evb3.2_lql.cfg evb.out ../lql.top
+
+
+thermo          100
+thermo_style    custom step temp ke pe evdwl ecoul ebond eangle edihed eimp etotal spcpu
+
+restart         1000 @@@FOLDER/lql.restart1 @@@FOLDER/lql.restart2
+dump            1 all custom 10000 @@@FOLDER/lql_@@@CEC_@@@WW-@@@PART.dump id mol type q x y z
+dump_modify     1 sort id flush yes append yes
+

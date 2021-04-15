@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -A AFPRD13233022
+#PBS -q standard
+#PBS -l walltime=20:00:00
+#PBS -l select=@@@NWINS:ncpus=48:mpiprocs=48
+#PBS -j oe
+#PBS -N @@@WW_ch@@@CHUNK_@@@PART
+#PBS -m a
+#PBS -M lcwatkins@uchicago.edu
+
+source /p/home/lcwatkin/code/lammps.23753/sourceme.sh
+remd=/p/home/lcwatkin/code/hremd/build/hremd.ex
+
+cd $PBS_O_WORKDIR
+
+export PLUMED_MAXBACKUP=0
+
+aprun -n $((@@@NWINS*48)) $remd remd.@@@PART.ini > remd.@@@PART.out
+

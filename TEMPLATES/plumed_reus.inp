@@ -1,0 +1,5 @@
+### MUST sub in folder!!!!
+fix             plumed_cec all plumed &
+                plumedfile @@@FOLDER/plumed_cec-tmp.dat &
+                outfile @@@FOLDER/meta.cec.out
+fix_modify      plumed_cec energy yes

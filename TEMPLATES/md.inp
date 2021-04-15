@@ -1,0 +1,32 @@
+
+units           real
+neigh_modify    delay 2 every 1
+
+atom_style      full
+bond_style      hybrid harmonic morse
+angle_style     charmm
+dihedral_style  charmm
+improper_style  harmonic
+special_bonds   charmm
+
+pair_style      lj/charmm/coul/long 10 12
+pair_modify     mix arithmetic
+kspace_style    pppm 1e-4
+
+package         omp 1
+
+read_restart    @@@FOLDER/@@@RST
+include         ../pair_bond_lql.cfg
+
+timestep        1.0
+fix             1 all nvt temp 298.0 298.0 100.0 
+fix             evb all evb ../evb3.2_lql.cfg evb.out ../lql.top
+
+
+thermo          100
+thermo_style    custom step temp ke pe evdwl ecoul ebond eangle edihed eimp etotal spcpu
+
+restart         1000 @@@FOLDER/lql.restart1 @@@FOLDER/lql.restart2
+dump            1 all custom 10000 @@@FOLDER/lql_@@@CEC_@@@WW-@@@PART.dump id mol type q x y z
+dump_modify     1 sort id flush yes append yes
+
