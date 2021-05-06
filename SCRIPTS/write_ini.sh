@@ -10,7 +10,7 @@ printf "T 1 1 298.00\n\n" > $outf
 printf "V $nwins ''\n" >> $outf
 
 for i in $(seq 0 $(($nwins-1))) ; do 
-    printf "'%03d/plumed-reus-fix.inp'\n" $i >> $outf
+    printf "'%03d/plumed_reus.inp'\n" $i >> $outf
 done
 
 printf "\nLAMMPS md md md.inp res.inp res.post.inp\n\n" >> $outf

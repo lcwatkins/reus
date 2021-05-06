@@ -1,6 +1,6 @@
 undump          1
-dump            1 all custom 20000 ${folder}/lql.@@@PART.dump id mol type q x y z
-dump_modify     1 sort id flush yes append yes
+dump            1 all custom 1000000 ${folder}/lql.@@@PART.dump id mol type q x y z
+dump_modify     1 sort id first yes flush yes append yes
 
 # This *needs* to be before below
 fix             evb all evb ../evb3.2_lql.cfg ${folder}/evb.out.@@@PART-${run_id} ../lql.top
